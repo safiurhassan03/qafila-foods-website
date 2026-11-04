@@ -79,8 +79,7 @@ const storage = multer.diskStorage({
   filename: (_,file,cb)=>cb(null,Date.now()+"-"+file.originalname.replace(/[^a-zA-Z0-9._-]/g,""))
 });
 const upload = multer({storage, limits:{fileSize:5*1024*1024}});
-app.use(express.static(path.join(__dirname,"public")));
-
+app.use(express.static(path.join(__dirname,"public","Public")));
 function admin(req,res,next){ if(req.session.admin) return next(); return res.status(401).json({error:"Please login"}); }
 const all = (sql,...args)=>db.prepare(sql).all(...args);
 const one = (sql,...args)=>db.prepare(sql).get(...args);
